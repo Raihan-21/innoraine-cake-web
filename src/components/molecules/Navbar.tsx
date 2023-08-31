@@ -6,7 +6,7 @@ import React from "react";
 const Navbar = () => {
   const isLoggedIn = useMainStore((state: any) => state.isLoggedIn);
   return (
-    <Box position={"sticky"} top={0} zIndex={10}>
+    <Box backgroundColor={"white"} position={"sticky"} top={0} zIndex={10}>
       <Flex paddingY={20} paddingX={30} justifyContent={"space-between"}>
         <Box>Navbar</Box>
         <Flex columnGap={10}>

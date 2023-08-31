@@ -2,6 +2,8 @@ import axiosInstance from "@/axios";
 import BlankLayout from "@/components/templates/blank";
 import useMainStore from "@/store";
 import { Box, Button, Input, Text, VStack } from "@chakra-ui/react";
+import { setCookie } from "cookies-next";
+import { cookies } from "next/headers";
 import { useRouter } from "next/router";
 import React, { ReactElement, useCallback, useState } from "react";
 
@@ -19,6 +21,7 @@ const login = () => {
   const setLoggedIn: (payload: boolean) => void = useMainStore(
     (state: any) => state.setLoggedIn
   );
+  const setToken = useMainStore((state: any) => state.setToken);
 
   const router = useRouter();
   const onSubmit = useCallback(
@@ -28,7 +31,9 @@ const login = () => {
         const res = await axiosInstance.post("/api/login", formData);
         setLoggedIn(true);
         const authData = { isLoggedIn: true };
-        window.localStorage.setItem("auth", JSON.stringify(authData));
+        setCookie("innoraine_token", res.data.token);
+        setToken(res.data.token);
+        // window.localStorage.setItem("auth", JSON.stringify(authData));
         router.push("/");
       } catch (error) {
         throw error;

@@ -1,10 +1,12 @@
 import axiosInstance from "@/axios";
 import { Box, Button, Flex, Grid, GridItem, Img, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { ProductType } from "../../types/data";
 import Slider from "react-slick";
 import Card from "@/components/molecules/Card";
 import Link from "next/link";
+import useMainStore from "@/store";
+import { useRouter } from "next/navigation";
 
 const carouselSetting = {
   dots: true,
@@ -19,9 +21,19 @@ export const getServerSideProps = async () => {
 };
 
 const produk = ({ products }: { products: ProductType[] }) => {
+  const isLoggedIn = useMainStore((state: any) => state.isLoggedIn);
+  const router = useRouter();
+  const addToCart = useCallback(() => {
+    if (!isLoggedIn) router.push("/login");
+  }, [isLoggedIn]);
+
   return (
     <Box backgroundColor={"black"} padding={20}>
-      <Grid columnGap={10} templateColumns={"repeat(4, 1fr)"}>
+      <Grid
+        columnGap={10}
+        rowGap={10}
+        templateColumns={["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(4, 1fr)"]}
+      >
         {products.length &&
           products.map((product, i) => (
             <GridItem key={i}>
@@ -35,7 +47,7 @@ const produk = ({ products }: { products: ProductType[] }) => {
                     <Link href={`/${product.id}`}>
                       <Img
                         src={product.gambar_utama}
-                        // maxWidth={200}
+                        width={"100%"}
                         borderRadius={10}
                         marginBottom={3}
                         height={173}
@@ -50,7 +62,11 @@ const produk = ({ products }: { products: ProductType[] }) => {
                     columnGap={5}
                     marginTop={5}
                   >
-                    <Button backgroundColor={"black"} color={"white"}>
+                    <Button
+                      backgroundColor={"black"}
+                      color={"white"}
+                      onClick={addToCart}
+                    >
                       Add to cart
                     </Button>
                     <Text fontWeight={"bold"}>
