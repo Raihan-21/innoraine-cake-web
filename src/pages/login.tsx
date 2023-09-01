@@ -22,6 +22,7 @@ const login = () => {
     (state: any) => state.setLoggedIn
   );
   const setToken = useMainStore((state: any) => state.setToken);
+  const setProfile = useMainStore((state: any) => state.setProfile);
 
   const router = useRouter();
   const onSubmit = useCallback(
@@ -32,7 +33,9 @@ const login = () => {
         setLoggedIn(true);
         const authData = { isLoggedIn: true };
         setCookie("innoraine_token", res.data.token);
+        setCookie("innoraine_profile", res.data.body);
         setToken(res.data.token);
+        setProfile(res.data.body);
         // window.localStorage.setItem("auth", JSON.stringify(authData));
         router.push("/");
       } catch (error) {

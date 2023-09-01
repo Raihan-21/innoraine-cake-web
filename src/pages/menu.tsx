@@ -1,12 +1,14 @@
 import axiosInstance from "@/axios";
 import { Box, Button, Flex, Grid, GridItem, Img, Text } from "@chakra-ui/react";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ProductType } from "../../types/data";
 import Slider from "react-slick";
 import Card from "@/components/molecules/Card";
 import Link from "next/link";
 import useMainStore from "@/store";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import ProductCard from "@/components/organisms/ProductCard";
 
 const carouselSetting = {
   dots: true,
@@ -22,10 +24,51 @@ export const getServerSideProps = async () => {
 
 const produk = ({ products }: { products: ProductType[] }) => {
   const isLoggedIn = useMainStore((state: any) => state.isLoggedIn);
+  const profile = useMainStore((state: any) => state.profile);
   const router = useRouter();
-  const addToCart = useCallback(() => {
-    if (!isLoggedIn) router.push("/login");
-  }, [isLoggedIn]);
+  const [selectedMenu, setSelectedMenu] = useState<ProductType[]>([]);
+  const addToCart = useCallback(
+    async (product: ProductType) => {
+      if (!isLoggedIn) router.push("/login");
+      setSelectedMenu([...selectedMenu, product]);
+      // const res = await axiosInstance.post("/api/cart", {
+      //   id_user: profile.id,
+      //   id_produk: product.id,
+      //   jumlah: 1,
+      //   harga: product.harga,
+      // });
+    },
+    [isLoggedIn]
+  );
+
+  const incrementProduct = useCallback(
+    async (id: number) => {
+      console.log(selectedMenu);
+      setSelectedMenu(
+        selectedMenu.map((menu) => {
+          if (menu.id == id) {
+            return { ...menu, jumlah: menu.jumlah + 1 };
+          }
+          return { ...menu };
+        })
+      );
+      // console.log(selectedMenu);
+    },
+    [selectedMenu]
+  );
+  const decrementProduct = useCallback(
+    async (id: number) => {
+      setSelectedMenu(
+        selectedMenu.map((menu) => {
+          if (menu.id === id) {
+            return { ...menu, jumlah: menu.jumlah - 1 };
+          }
+          return { ...menu };
+        })
+      );
+    },
+    [selectedMenu]
+  );
 
   return (
     <Box backgroundColor={"black"} padding={20}>
@@ -37,47 +80,7 @@ const produk = ({ products }: { products: ProductType[] }) => {
         {products.length &&
           products.map((product, i) => (
             <GridItem key={i}>
-              <Card>
-                <Flex
-                  flexDirection={"column"}
-                  justifyContent={"space-between"}
-                  height={"100%"}
-                >
-                  <Box>
-                    <Link href={`/${product.id}`}>
-                      <Img
-                        src={product.gambar_utama}
-                        width={"100%"}
-                        borderRadius={10}
-                        marginBottom={3}
-                        height={173}
-                      />
-                    </Link>
-                    <Text fontWeight={"bold"}>{product.nama_produk}</Text>
-                    <Text>{product.deskripsi}</Text>
-                  </Box>
-                  <Flex
-                    justifyContent={"space-between"}
-                    alignItems={"center"}
-                    columnGap={5}
-                    marginTop={5}
-                  >
-                    <Button
-                      backgroundColor={"black"}
-                      color={"white"}
-                      onClick={addToCart}
-                    >
-                      Add to cart
-                    </Button>
-                    <Text fontWeight={"bold"}>
-                      {new Intl.NumberFormat("id-ID", {
-                        style: "currency",
-                        currency: "IDR",
-                      }).format(product.harga)}
-                    </Text>
-                  </Flex>
-                </Flex>
-              </Card>
+              <ProductCard data={product} />
             </GridItem>
           ))}
       </Grid>

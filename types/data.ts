@@ -13,6 +13,11 @@ interface ProductType {
   harga: number;
 }
 
+interface ImageType {
+  id: number;
+  id_produk: number;
+  url: string;
+}
 interface RoleType {
   id: number;
   nama_role: string;
@@ -27,4 +32,4 @@ interface UserType {
   role: RoleType;
 }
 
-export type { ProductType, CategoryType, RoleType };
+export type { ProductType, CategoryType, ImageType, RoleType };
