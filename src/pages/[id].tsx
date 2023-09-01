@@ -48,12 +48,25 @@ const menuDetail = ({
     setCartData({ jumlah: 1, harga: data.harga });
   }, [data, cartData]);
   const incrementProduct = useCallback(async () => {
-    setCartData((prevState) => ({ ...prevState, jumlah: prevState.jumlah++ }));
+    setCartData((prevState) => ({
+      ...prevState,
+      jumlah: prevState.jumlah++,
+      harga: prevState.harga + data.harga,
+    }));
   }, [cartData, data]);
   const decrementProduct = useCallback(async () => {
     if (cartData.jumlah === 1)
       setCartData((prevState) => ({ ...prevState, jumlah: 0, harga: 0 }));
-    setCartData((prevState) => ({ ...prevState, jumlah: prevState.jumlah-- }));
+    setCartData((prevState) => ({
+      ...prevState,
+      jumlah: prevState.jumlah--,
+      harga: prevState.harga - data.harga,
+    }));
+    const res = await axiosInstance.post("/api/cart", {
+      id_produk: data.id,
+      jumlah: cartData.jumlah,
+      harga: cartData.harga,
+    });
   }, [cartData, data]);
 
   return (
