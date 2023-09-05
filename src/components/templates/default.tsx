@@ -9,7 +9,7 @@ const DefaultLayout = ({ children }: { children: ReactElement }) => {
   const setLoggedIn = useMainStore((state: any) => state.setLoggedIn);
   const setProfile = useMainStore((state: any) => state.setProfile);
   const tokenCookie = getCookie("innoraine_token");
-  const profileCookie = getCookie("innoraine_profile");
+  const profileCookie = JSON.parse(getCookie("innoraine_profile") || "{}");
   useEffect(() => {
     if (tokenCookie) {
       setToken(tokenCookie);

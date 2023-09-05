@@ -6,7 +6,7 @@ import Slider from "react-slick";
 import Card from "@/components/molecules/Card";
 import Link from "next/link";
 import useMainStore from "@/store";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import axios from "axios";
 import ProductCard from "@/components/organisms/ProductCard";
 

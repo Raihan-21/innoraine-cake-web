@@ -2,6 +2,7 @@ const authSlice = (set: any) => ({
   isLoggedIn: false,
   token: "",
   profile: {
+    id: "",
     nama: "",
   },
   setLoggedIn: (payload: boolean) => {
@@ -10,7 +11,8 @@ const authSlice = (set: any) => ({
   setToken: (payload: string) => {
     set((state: any) => ({ token: payload }));
   },
-  setProfile: (payload: string) => {
+  setProfile: (payload: any) => {
+    console.log(typeof payload);
     set((state: any) => ({ profile: payload }));
   },
 });
