@@ -1,5 +1,15 @@
 import axiosInstance from "@/axios";
-import { Box, Button, Flex, Grid, GridItem, Img, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  GridItem,
+  HStack,
+  Img,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import React, { useState, useCallback } from "react";
 import { ImageType, ProductType } from "../../types/data";
 
@@ -137,27 +147,28 @@ const menuDetail = ({
             <Text fontWeight={"bold"} fontSize={30}>
               {data.nama_produk}
             </Text>
-            <Text>{data.deskripsi}</Text>
-
-            <Flex alignItems={"center"} columnGap={5}>
-              <Button borderRadius={"50%"} onClick={decrementProduct}>
-                -
+            <Text marginBottom={5}>{data.deskripsi}</Text>
+            <VStack spacing={5} align={"flex-start"}>
+              <Flex alignItems={"center"} columnGap={5}>
+                <Button borderRadius={"50%"} onClick={decrementProduct}>
+                  -
+                </Button>
+                <Box>{cartData.jumlah}</Box>
+                <Button borderRadius={"50%"} onClick={incrementProduct}>
+                  +
+                </Button>
+              </Flex>
+              <Button
+                backgroundColor={"black"}
+                color={"white"}
+                onClick={() => {
+                  addToCart();
+                }}
+              >
+                Order this menu
               </Button>
-              <Box>{cartData.jumlah}</Box>
-              <Button borderRadius={"50%"} onClick={incrementProduct}>
-                +
-              </Button>
-            </Flex>
-            <Button
-              backgroundColor={"black"}
-              color={"white"}
-              onClick={() => {
-                addToCart();
-              }}
-            >
-              Order this menu
-            </Button>
-          </Box>
+            </VStack>
+          </Box>{" "}
         </GridItem>
       </Grid>
     </Box>

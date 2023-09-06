@@ -14,7 +14,10 @@ const Navbar = () => {
           <Link href="/menu">Menu </Link>
         </Flex>
         {isLoggedIn ? (
-          <Box>Akun</Box>
+          <Flex columnGap={3}>
+            <Box>Cart</Box>
+            <Box>Akun</Box>
+          </Flex>
         ) : (
           <Flex>
             <Link href={"/login"}>
