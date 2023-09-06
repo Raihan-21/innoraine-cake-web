@@ -16,7 +16,6 @@ export const getServerSideProps = async ({ params }: { params: any }) => {
     axiosInstance.get(`/api/products/${params.id}`),
     axiosInstance.get(`/api/products/gallery/${params.id}`),
   ]);
-  console.log(product.data.body);
   let carouselSetting = {
     arrows: true,
     slidesToShow: 4,
@@ -44,8 +43,8 @@ const menuDetail = ({
 }) => {
   const [selectedImage, setSelectedImage] = useState("");
   const [cartData, setCartData] = useState({
-    jumlah: 0,
-    harga: 0,
+    jumlah: 1,
+    harga: Number(data.harga),
   });
   const isLoggedIn = useMainStore((state: any) => state.isLoggedIn);
   const profile = useMainStore((state: any) => state.profile);
@@ -55,13 +54,13 @@ const menuDetail = ({
       router.push("/login");
       return;
     }
-    setCartData({ jumlah: 1, harga: data.harga });
+    // setCartData({ jumlah: 1, harga: data.harga });
     try {
       const res = await axiosInstance.post(`/api/cart`, {
         id_user: profile.id,
         id_produk: router.query.id,
-        jumlah: 1,
-        harga: data.harga,
+        jumlah: cartData.jumlah,
+        harga: cartData.harga,
       });
     } catch (error) {
       throw error;
@@ -69,25 +68,25 @@ const menuDetail = ({
   }, [isLoggedIn, profile, data, cartData]);
   const incrementProduct = useCallback(async () => {
     try {
-      const res = await axiosInstance.put("/api/cart", {
-        id_user: profile.id,
-        id_produk: data.id,
-        operation: "increment",
-      });
+      // const res = await axiosInstance.put("/api/cart", {
+      //   id_user: profile.id,
+      //   id_produk: data.id,
+      //   operation: "increment",
+      // });
       setCartData((prevState) => ({
         ...prevState,
-        jumlah: prevState.jumlah++,
-        harga: prevState.harga + data.harga,
+        jumlah: prevState.jumlah + 1,
+        harga: prevState.harga + Number(data.harga),
       }));
     } catch (error) {}
   }, [profile, cartData, data]);
   const decrementProduct = useCallback(async () => {
     try {
-      const res = await axiosInstance.put("/api/cart", {
-        id_user: profile.id,
-        id_produk: data.id,
-        operation: "decrement",
-      });
+      // const res = await axiosInstance.put("/api/cart", {
+      //   id_user: profile.id,
+      //   id_produk: data.id,
+      //   operation: "decrement",
+      // });
       if (cartData.jumlah === 1)
         setCartData((prevState) => ({ ...prevState, jumlah: 0, harga: 0 }));
       setCartData((prevState) => ({
@@ -140,27 +139,24 @@ const menuDetail = ({
             </Text>
             <Text>{data.deskripsi}</Text>
 
-            {cartData.jumlah < 1 ? (
-              <Button
-                backgroundColor={"black"}
-                color={"white"}
-                onClick={() => {
-                  addToCart();
-                }}
-              >
-                Order this menu
+            <Flex alignItems={"center"} columnGap={5}>
+              <Button borderRadius={"50%"} onClick={decrementProduct}>
+                -
               </Button>
-            ) : (
-              <Flex alignItems={"center"} columnGap={5}>
-                <Button borderRadius={"50%"} onClick={decrementProduct}>
-                  -
-                </Button>
-                <Box>{cartData.jumlah}</Box>
-                <Button borderRadius={"50%"} onClick={incrementProduct}>
-                  +
-                </Button>
-              </Flex>
-            )}
+              <Box>{cartData.jumlah}</Box>
+              <Button borderRadius={"50%"} onClick={incrementProduct}>
+                +
+              </Button>
+            </Flex>
+            <Button
+              backgroundColor={"black"}
+              color={"white"}
+              onClick={() => {
+                addToCart();
+              }}
+            >
+              Order this menu
+            </Button>
           </Box>
         </GridItem>
       </Grid>
