@@ -16,7 +16,6 @@ const DefaultLayout = ({ children }: { children: ReactElement }) => {
       setLoggedIn(true);
       setProfile(profileCookie);
     }
-    console.log("default");
   }, []);
 
   return (

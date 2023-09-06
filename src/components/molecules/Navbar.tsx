@@ -15,7 +15,9 @@ const Navbar = () => {
         </Flex>
         {isLoggedIn ? (
           <Flex columnGap={3}>
-            <Box>Cart</Box>
+            <Link href={"/keranjang"}>
+              <Box>Cart</Box>
+            </Link>
             <Box>Akun</Box>
           </Flex>
         ) : (
