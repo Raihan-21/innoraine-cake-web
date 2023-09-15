@@ -1,7 +1,15 @@
 import axiosInstance from "@/axios";
 import useMainStore from "@/store";
-import { Box, Flex, Image, Button, Text } from "@chakra-ui/react";
-import React, { useCallback, useState } from "react";
+import {
+  Box,
+  Flex,
+  Image,
+  Button,
+  Text,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
+import React, { useCallback, useEffect, useState } from "react";
 
 const CartItem = ({ data }: { data: any }) => {
   const [cartData, setCartData] = useState(data);
@@ -59,30 +67,52 @@ const CartItem = ({ data }: { data: any }) => {
   }, [cartData]);
 
   return (
-    <Flex columnGap={10} justifyContent={"space-between"}>
-      <Flex columnGap={5}>
-        <Image src={cartData.produk.gambar_utama} width={100} />
-        <Box>{cartData.produk.nama_produk}</Box>
-      </Flex>
-      <Box>
-        <Flex alignItems={"center"} columnGap={3}>
-          {/* <Text fontSize={"small"}>x</Text> */}
-          <Button disabled={isLoading} onClick={decrementProduct}>
-            -
-          </Button>
-          <Text>{cartData.jumlah}</Text>
-          <Button disabled={isLoading} onClick={incrementProduct}>
-            +
-          </Button>
+    <Grid
+      columnGap={10}
+      templateColumns="repeat(3, 1fr)"
+      alignItems={"center"}
+      marginBottom={5}
+    >
+      <GridItem>
+        <Flex columnGap={5}>
+          <Image
+            src={cartData.produk.gambar_utama}
+            width={100}
+            borderRadius={"md"}
+          />
+          <Box>
+            <Text fontWeight={"bold"}>{cartData.produk.nama_produk}</Text>
+            <Text fontSize={"small"} color={"gray.500"}>
+              {cartData.kategori.nama_kategori}
+            </Text>
+          </Box>
         </Flex>
-      </Box>
-      <Box>
-        {new Intl.NumberFormat("id-ID", {
-          style: "currency",
-          currency: "IDR",
-        }).format(cartData.harga)}
-      </Box>
-    </Flex>
+      </GridItem>
+      <GridItem>
+        <Box>
+          <Flex alignItems={"center"} columnGap={3}>
+            {/* <Text fontSize={"small"}>x</Text> */}
+            <Button disabled={isLoading} onClick={decrementProduct}>
+              -
+            </Button>
+            <Text>{cartData.jumlah}</Text>
+            <Button disabled={isLoading} onClick={incrementProduct}>
+              +
+            </Button>
+          </Flex>
+        </Box>
+      </GridItem>
+      <GridItem>
+        <Box>
+          <Text fontWeight={"bold"}>
+            {new Intl.NumberFormat("id-ID", {
+              style: "currency",
+              currency: "IDR",
+            }).format(cartData.harga)}
+          </Text>
+        </Box>
+      </GridItem>
+    </Grid>
   );
 };
 

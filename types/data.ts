@@ -32,4 +32,4 @@ interface UserType {
   role: RoleType;
 }
 
-export type { ProductType, CategoryType, ImageType, RoleType };
+export type { ProductType, CategoryType, ImageType, RoleType, UserType };
