@@ -1,5 +1,13 @@
 import useMainStore from "@/store";
-import { Box, Button, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
 
@@ -18,7 +26,16 @@ const Navbar = () => {
             <Link href={"/keranjang"}>
               <Box>Cart</Box>
             </Link>
-            <Box>Akun</Box>
+            <Menu>
+              <MenuButton>Akun</MenuButton>
+              <MenuList>
+                <MenuItem>
+                  <Link href={"/invoice"} style={{ width: "100%" }}>
+                    Invoice
+                  </Link>
+                </MenuItem>
+              </MenuList>
+            </Menu>
           </Flex>
         ) : (
           <Flex>
