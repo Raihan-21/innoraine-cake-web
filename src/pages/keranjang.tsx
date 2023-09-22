@@ -12,6 +12,7 @@ import {
   Text,
   Textarea,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import React, { useState, useEffect, useCallback } from "react";
@@ -47,6 +48,7 @@ const keranjang = ({ cart }: { cart: any }) => {
     no_telp: 0,
     role: { id: 0, nama_role: "" },
   });
+  const toast = useToast();
   const order = useCallback(async () => {
     try {
       const res = await axiosInstance.post("/api/order", {
@@ -56,18 +58,26 @@ const keranjang = ({ cart }: { cart: any }) => {
         no_telp: formData.no_telp,
         alamat: formData.alamat,
       });
-      console.log(res.data);
+      toast({
+        title: "Order success",
+        status: "success",
+        duration: 5000,
+        isClosable: false,
+      });
     } catch (error) {
       throw error;
     }
   }, [formData]);
   useEffect(() => {
-    setFormData(profile);
+    setFormData({ ...profile });
     console.log(profile);
   }, [profile]);
 
   return (
     <Box padding={5}>
+      <Text fontWeight={"bold"} fontSize={"3xl"} marginBottom={5}>
+        Keranjang
+      </Text>
       {!cart.data.length ? (
         <Flex justifyContent={"center"}>
           Anda belum memiliki kue apapun dalam keranjang

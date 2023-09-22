@@ -32,52 +32,54 @@ export const getServerSideProps = async (context: any) => {
 const InvoiceDetail = ({ items, invoice }: { items: any; invoice: any }) => {
   return (
     <Box padding={10}>
-      <Flex justifyContent={"space-between"} marginBottom={5}>
-        <Text fontSize={"3xl"}>Invoice</Text>
-        <Text>{new Date(invoice.created_at).toISOString()}</Text>
-      </Flex>
-      <Table>
-        <Thead>
-          <Tr>
-            <Th>Barang</Th>
-            <Th>Jumlah</Th>
-            <Th>Harga</Th>
-            <Th>Subtotal</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {items.length &&
-            items.map((item: any, i: number) => (
-              <Tr key={i}>
-                <Td>{item.produk.nama_produk}</Td>
-                <Td>{item.jumlah}</Td>
-                <Td>
-                  {new Intl.NumberFormat("id-UD", {
-                    style: "currency",
-                    currency: "IDR",
-                  }).format(item.harga)}
-                </Td>
-                <Td>
-                  {new Intl.NumberFormat("id-UD", {
-                    style: "currency",
-                    currency: "IDR",
-                  }).format(Number(item.harga) * Number(item.jumlah))}
-                </Td>
-              </Tr>
-            ))}
-          <Tr>
-            <Td colSpan={3} fontWeight={"bold"}>
-              Total
-            </Td>
-            <Td fontWeight={"bold"}>
-              {new Intl.NumberFormat("id-ID", {
-                style: "currency",
-                currency: "IDR",
-              }).format(invoice.total_harga)}
-            </Td>
-          </Tr>
-        </Tbody>
-      </Table>
+      <Box padding={10} boxShadow={"0px 0px 5px 1px  gray"}>
+        <Flex justifyContent={"space-between"} marginBottom={5}>
+          <Text fontSize={"3xl"}>Invoice</Text>
+          <Text>{new Date(invoice.created_at).toISOString()}</Text>
+        </Flex>
+        <Table>
+          <Thead>
+            <Tr>
+              <Th>Barang</Th>
+              <Th>Jumlah</Th>
+              <Th>Harga</Th>
+              <Th>Subtotal</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {items.length &&
+              items.map((item: any, i: number) => (
+                <Tr key={i}>
+                  <Td>{item.produk.nama_produk}</Td>
+                  <Td>{item.jumlah}</Td>
+                  <Td>
+                    {new Intl.NumberFormat("id-UD", {
+                      style: "currency",
+                      currency: "IDR",
+                    }).format(item.harga)}
+                  </Td>
+                  <Td>
+                    {new Intl.NumberFormat("id-UD", {
+                      style: "currency",
+                      currency: "IDR",
+                    }).format(Number(item.harga) * Number(item.jumlah))}
+                  </Td>
+                </Tr>
+              ))}
+            <Tr>
+              <Td colSpan={3} fontWeight={"bold"}>
+                Total
+              </Td>
+              <Td fontWeight={"bold"}>
+                {new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                }).format(invoice.total_harga)}
+              </Td>
+            </Tr>
+          </Tbody>
+        </Table>
+      </Box>
     </Box>
   );
 };

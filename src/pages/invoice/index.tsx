@@ -8,7 +8,6 @@ export const getServerSideProps = async (context: any) => {
   try {
     const profile = JSON.parse(context.req.cookies.innoraine_profile);
     const res = await axiosInstance.get(`/api/order?id_user=${profile.id}`);
-
     return {
       props: {
         invoices: res.data.body,
@@ -40,10 +39,22 @@ const invoice = ({ invoices }: { invoices: any }) => {
                 columnGap={5}
                 borderRadius={5}
               >
-                <Box>{invoice.created_at}</Box>
-                {invoice.status && (
+                <Flex
+                  columnGap={5}
+                  justifyContent={"space-between"}
+                  width={"100%"}
+                >
+                  <Box>
+                    <Text>{invoice.alamat}</Text>
+                  </Box>
+                  <Box>
+                    <Text>{invoice.created_at}</Text>
+                    {/* <Text>{invoice.created_at}</Text> */}
+                  </Box>
+                </Flex>
+                {/* {invoice.status && (
                   <Pills color="red.400" text={invoice.status} />
-                )}
+                )} */}
               </Flex>
             </Link>
           ))}

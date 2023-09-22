@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import { Box, Flex, Img, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, GridItem, Img, Text } from "@chakra-ui/react";
 import { ReactElement } from "react";
 import Protected from "@/components/templates/protected";
 import axiosInstance from "@/axios";
@@ -9,12 +9,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import Slider from "react-slick";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const carouselSetting = {
   dots: false,
-  arrow: false,
+  arrows: false,
   slidesToShow: 1,
 };
 
@@ -35,17 +36,29 @@ export default function Home({
   promotedProduct: ProductType[];
 }) {
   return (
-    <Box backgroundColor={"black"}>
-      <Slider>
+    <Box backgroundColor={"black"} paddingY={5} paddingX={5}>
+      <Slider {...carouselSetting}>
         {promotedProduct.length &&
           promotedProduct.map((product: ProductType, i: number) => (
             <Box key={i}>
-              <Flex>
-                <Img src={product.gambar_utama} />
-                <Box>
-                  <Text color={"white"}>{product.nama_produk}</Text>
-                </Box>
-              </Flex>
+              <Grid templateColumns={"repeat(2, 1fr)"} columnGap={5}>
+                <GridItem>
+                  <Img src={product.gambar_utama} maxHeight={400} />
+                </GridItem>
+                <GridItem>
+                  <Box>
+                    <Text fontWeight={"bold"} fontSize={50} color={"white"}>
+                      {product.nama_produk}
+                    </Text>
+                    <Text color={"white"}>{product.short_desc ?? ""}</Text>
+                    <Link href={"/menu"}>
+                      <Button position={"absolute"} marginTop={5}>
+                        View Menu
+                      </Button>
+                    </Link>
+                  </Box>
+                </GridItem>
+              </Grid>
             </Box>
           ))}
       </Slider>

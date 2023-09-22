@@ -9,6 +9,7 @@ interface ProductType {
   id_kategori: number;
   kategori: CategoryType;
   deskripsi: string;
+  short_desc: string;
   jumlah: number;
   harga: number;
 }

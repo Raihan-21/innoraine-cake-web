@@ -9,6 +9,7 @@ import {
   Img,
   Text,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState, useCallback } from "react";
 import { ImageType, ProductType } from "../../types/data";
@@ -59,6 +60,7 @@ const menuDetail = ({
   const isLoggedIn = useMainStore((state: any) => state.isLoggedIn);
   const profile = useMainStore((state: any) => state.profile);
   const router = useRouter();
+  const toast = useToast();
   const addToCart = useCallback(async () => {
     if (!isLoggedIn) {
       router.push("/login");
@@ -71,6 +73,11 @@ const menuDetail = ({
         id_produk: router.query.id,
         jumlah: cartData.jumlah,
         harga: cartData.harga,
+      });
+      toast({
+        title: "Berhasil menambahkan item",
+        status: "success",
+        duration: 5000,
       });
     } catch (error) {
       throw error;
