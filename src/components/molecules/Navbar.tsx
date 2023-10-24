@@ -38,7 +38,7 @@ const Navbar = () => {
             </Menu>
           </Flex>
         ) : (
-          <Flex>
+          <Flex columnGap={3}>
             <Link href={"/login"}>
               <Button
                 variant={"solid"}

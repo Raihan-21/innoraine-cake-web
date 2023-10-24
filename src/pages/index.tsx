@@ -36,7 +36,13 @@ export default function Home({
   promotedProduct: ProductType[];
 }) {
   return (
-    <Box backgroundColor={"black"} paddingY={5} paddingX={5}>
+    <Box
+      backgroundColor={"black"}
+      paddingY={5}
+      paddingX={5}
+      minHeight={"calc(100vh - 80px)"}
+      className="main-container"
+    >
       <Slider {...carouselSetting}>
         {promotedProduct.length &&
           promotedProduct.map((product: ProductType, i: number) => (
