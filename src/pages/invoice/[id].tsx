@@ -35,7 +35,7 @@ const InvoiceDetail = ({ items, invoice }: { items: any; invoice: any }) => {
       <Box padding={10} boxShadow={"0px 0px 5px 1px  gray"}>
         <Flex justifyContent={"space-between"} marginBottom={5}>
           <Text fontSize={"3xl"}>Invoice</Text>
-          <Text>{new Date(invoice.created_at).toISOString()}</Text>
+          <Text>{new Date(invoice.created_at).toLocaleString()}</Text>
         </Flex>
         <Table>
           <Thead>

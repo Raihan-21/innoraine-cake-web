@@ -79,6 +79,7 @@ const menuDetail = ({
         status: "success",
         duration: 5000,
       });
+      router.push("/keranjang");
     } catch (error) {
       throw error;
     }
@@ -124,7 +125,7 @@ const menuDetail = ({
     <Box paddingX={10}>
       <Grid columnGap={10} templateColumns={"repeat(3, 1fr)"}>
         {/* Min width 0 to fix react slick bug */}
-        <GridItem minWidth={0} colSpan={1}>
+        <GridItem minWidth={0} colSpan={{ base: 3, sm: 1 }}>
           <Box minWidth={0}>
             <Img
               src={selectedImage ? selectedImage : data.gambar_utama}
@@ -149,7 +150,7 @@ const menuDetail = ({
             </Box>
           </Box>
         </GridItem>
-        <GridItem colSpan={2}>
+        <GridItem colSpan={{ base: 3, sm: 2 }}>
           <Box paddingTop={8}>
             <Text fontWeight={"bold"} fontSize={30}>
               {data.nama_produk}

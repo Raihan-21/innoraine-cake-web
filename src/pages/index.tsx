@@ -21,7 +21,7 @@ const carouselSetting = {
 
 export const getServerSideProps = async () => {
   const res = await axiosInstance.get(
-    "/api/products?orderby=created_at&sort=desc"
+    "/api/products?orderby=created_at&sort=desc&limit=1"
   );
   return {
     props: {

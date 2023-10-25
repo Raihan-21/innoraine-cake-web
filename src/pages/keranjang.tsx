@@ -19,6 +19,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { ProductType, UserType } from "../../types/data";
 import CartItem from "@/components/organisms/CartItem";
 import useMainStore from "@/store";
+import { useRouter } from "next/router";
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
@@ -49,10 +50,11 @@ const keranjang = ({ cart }: { cart: any }) => {
     role: { id: 0, nama_role: "" },
   });
   const toast = useToast();
+  const router = useRouter();
   const order = useCallback(async () => {
     try {
       const res = await axiosInstance.post("/api/order", {
-        items: cart.data.map((item: any) => item.id),
+        items: cart.data.map((item: any) => item),
         id_user: formData.id,
         nama: formData.nama,
         no_telp: formData.no_telp,
@@ -64,6 +66,7 @@ const keranjang = ({ cart }: { cart: any }) => {
         duration: 5000,
         isClosable: false,
       });
+      router.push(`/invoice/${res.data.body.data.id}`);
     } catch (error) {
       throw error;
     }

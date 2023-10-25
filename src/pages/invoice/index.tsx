@@ -48,7 +48,7 @@ const invoice = ({ invoices }: { invoices: any }) => {
                     <Text>{invoice.alamat}</Text>
                   </Box>
                   <Box>
-                    <Text>{invoice.created_at}</Text>
+                    <Text>{new Date(invoice.created_at).toLocaleString()}</Text>
                     {/* <Text>{invoice.created_at}</Text> */}
                   </Box>
                 </Flex>
