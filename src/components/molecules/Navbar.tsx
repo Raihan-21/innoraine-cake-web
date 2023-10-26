@@ -1,3 +1,4 @@
+import axiosInstance from "@/axios";
 import useMainStore from "@/store";
 import {
   Box,
@@ -7,16 +8,33 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Text,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 const Navbar = () => {
   const isLoggedIn = useMainStore((state: any) => state.isLoggedIn);
+  const cartItem = useMainStore((state: any) => state.cart.totalItem);
+  const idUser = useMainStore((state: any) => state.profile.id);
+  const setCartItem = useMainStore((state: any) => state.cart.setTotalItem);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axiosInstance.get(`/api/cart/total/${idUser}`);
+        setCartItem(res.data.body.count);
+      } catch (error) {
+        throw error;
+      }
+    };
+    if (isLoggedIn) fetchData();
+  }, [isLoggedIn, idUser]);
   return (
     <Box backgroundColor={"white"} position={"sticky"} top={0} zIndex={10}>
       <Flex paddingY={5} paddingX={30} justifyContent={"space-between"}>
-        <Box>Navbar</Box>
+        <Link href="/">
+          <Box>Home</Box>
+        </Link>
         <Flex columnGap={10}>
           <Link href="/test">About </Link>
           <Link href="/menu">Menu </Link>
@@ -24,7 +42,12 @@ const Navbar = () => {
         {isLoggedIn ? (
           <Flex columnGap={3}>
             <Link href={"/keranjang"}>
-              <Box>Cart</Box>
+              <Box position={"relative"}>
+                <Text position={"absolute"} top={-1} left={-2}>
+                  {cartItem}
+                </Text>
+                <Box>Cart</Box>
+              </Box>
             </Link>
             <Menu>
               <MenuButton>Akun</MenuButton>

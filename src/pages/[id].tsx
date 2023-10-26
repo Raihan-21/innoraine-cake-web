@@ -105,8 +105,10 @@ const menuDetail = ({
       //   id_produk: data.id,
       //   operation: "decrement",
       // });
-      if (cartData.jumlah === 1)
-        setCartData((prevState) => ({ ...prevState, jumlah: 0, harga: 0 }));
+      if (cartData.jumlah === 1) {
+        // setCartData((prevState) => ({ ...prevState, jumlah: 0, harga: 0 }));
+        return;
+      }
       setCartData((prevState) => ({
         ...prevState,
         jumlah: prevState.jumlah--,
