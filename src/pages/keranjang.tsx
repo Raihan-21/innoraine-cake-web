@@ -91,34 +91,35 @@ const keranjang = ({ cart }: { cart: any }) => {
             <Box>
               <Grid
                 columnGap={10}
-                templateColumns={"repeat(3, 1fr)"}
+                templateColumns={"repeat(5, 1fr)"}
                 borderBottom={"2px solid gray"}
                 paddingBottom={3}
                 marginBottom={5}
                 // borderColor={"black"}
               >
-                <GridItem>
+                <GridItem colSpan={2}>
                   <Text fontWeight={"bold"} color={"gray"}>
                     Produk
                   </Text>
                 </GridItem>
-                <GridItem>
+                <GridItem colSpan={1}>
                   <Text fontWeight={"bold"} color={"gray"}>
                     Jumlah
                   </Text>
                 </GridItem>
-                <GridItem>
+                <GridItem colSpan={1}>
                   <Text fontWeight={"bold"} color={"gray"}>
                     Harga
                   </Text>
                 </GridItem>
+                <GridItem colSpan={1}></GridItem>
               </Grid>
               {cart.data.length &&
                 cart.data.map((item: any, i: number) => (
                   <CartItem key={i} data={item} />
                 ))}
-              <Grid templateColumns={"repeat(3,1fr)"}>
-                <GridItem colSpan={1}></GridItem>
+              <Grid templateColumns={"repeat(5,1fr)"}>
+                <GridItem colSpan={2}></GridItem>
                 <GridItem colSpan={1}></GridItem>
                 <GridItem colSpan={1}>
                   <Flex columnGap={5} marginBottom={5}>

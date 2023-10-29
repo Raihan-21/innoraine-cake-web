@@ -10,6 +10,7 @@ import {
   GridItem,
 } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useState } from "react";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const CartItem = ({ data }: { data: any }) => {
   const [cartData, setCartData] = useState(data);
@@ -65,15 +66,21 @@ const CartItem = ({ data }: { data: any }) => {
     //   harga: cartData.harga,
     // });
   }, [cartData]);
-
+  const deleteItem = useCallback(async () => {
+    try {
+      const res = await axiosInstance.delete(
+        `/api/cart/${profile.id}/${cartData.produk.id}`
+      );
+    } catch (error) {}
+  }, [profile]);
   return (
     <Grid
       columnGap={10}
-      templateColumns="repeat(3, 1fr)"
+      templateColumns="repeat(5, 1fr)"
       alignItems={"center"}
       marginBottom={5}
     >
-      <GridItem>
+      <GridItem colSpan={2}>
         <Flex columnGap={5}>
           <Image
             src={cartData.produk.gambar_utama}
@@ -88,7 +95,7 @@ const CartItem = ({ data }: { data: any }) => {
           </Box>
         </Flex>
       </GridItem>
-      <GridItem>
+      <GridItem colSpan={1}>
         <Box>
           <Flex alignItems={"center"} columnGap={3}>
             {/* <Text fontSize={"small"}>x</Text> */}
@@ -102,7 +109,7 @@ const CartItem = ({ data }: { data: any }) => {
           </Flex>
         </Box>
       </GridItem>
-      <GridItem>
+      <GridItem colSpan={1}>
         <Box>
           <Text fontWeight={"bold"}>
             {new Intl.NumberFormat("id-ID", {
@@ -111,6 +118,11 @@ const CartItem = ({ data }: { data: any }) => {
             }).format(cartData.harga)}
           </Text>
         </Box>
+      </GridItem>
+      <GridItem colSpan={1}>
+        <Button variant={"unstyled"} onClick={deleteItem}>
+          <FaRegTrashAlt />
+        </Button>
       </GridItem>
     </Grid>
   );
