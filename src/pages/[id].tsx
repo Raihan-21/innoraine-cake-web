@@ -79,7 +79,7 @@ const menuDetail = ({
         status: "success",
         duration: 5000,
       });
-      router.push("/keranjang");
+      // router.push("/keranjang");
     } catch (error) {
       throw error;
     }
@@ -171,6 +171,7 @@ const menuDetail = ({
               <Button
                 backgroundColor={"black"}
                 color={"white"}
+                isDisabled={data.jumlah == 0}
                 onClick={() => {
                   addToCart();
                 }}

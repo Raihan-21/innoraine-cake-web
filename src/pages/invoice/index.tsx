@@ -47,10 +47,22 @@ const invoice = ({ invoices }: { invoices: any }) => {
                   <Box>
                     <Text>{invoice.alamat}</Text>
                   </Box>
-                  <Box>
-                    <Text>{new Date(invoice.created_at).toLocaleString()}</Text>
-                    {/* <Text>{invoice.created_at}</Text> */}
-                  </Box>
+                  <VStack alignItems={"flex-end"}>
+                    <Box>
+                      <Text>
+                        {new Date(invoice.created_at).toLocaleString("id-ID", {
+                          hour12: false,
+                        })}
+                      </Text>
+                      {/* <Text>{invoice.created_at}</Text> */}
+                    </Box>
+                    {invoice.status && (
+                      <Pills
+                        color={invoice.status === "pending" ? "red" : "green"}
+                        text={invoice.status}
+                      />
+                    )}
+                  </VStack>
                 </Flex>
                 {/* {invoice.status && (
                   <Pills color="red.400" text={invoice.status} />
