@@ -71,7 +71,9 @@ const Navbar = () => {
                 Masuk
               </Button>
             </Link>
-            <Button variant={"ghost"}>Daftar</Button>
+            <Link href={"/daftar"}>
+              <Button variant={"ghost"}>Daftar</Button>
+            </Link>
           </Flex>
         )}
       </Flex>
