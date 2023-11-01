@@ -11,6 +11,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { BsCart, BsCart2 } from "react-icons/bs";
+
 import React, { useEffect } from "react";
 
 const Navbar = () => {
@@ -33,20 +35,34 @@ const Navbar = () => {
     <Box backgroundColor={"white"} position={"sticky"} top={0} zIndex={10}>
       <Flex paddingY={5} paddingX={30} justifyContent={"space-between"}>
         <Link href="/">
-          <Box>Home</Box>
+          <Text fontWeight={"bold"} fontSize={"2xl"}>
+            Innoraine Cake
+          </Text>
         </Link>
         <Flex columnGap={10}>
           <Link href="/test">About </Link>
           <Link href="/menu">Menu </Link>
         </Flex>
         {isLoggedIn ? (
-          <Flex columnGap={3}>
+          <Flex columnGap={3} alignItems={"center"}>
             <Link href={"/keranjang"}>
               <Box position={"relative"}>
-                <Text position={"absolute"} top={-1} left={-2}>
-                  {cartItem}
-                </Text>
-                <Box>Cart</Box>
+                <Flex
+                  position={"absolute"}
+                  top={-3}
+                  left={-5}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  backgroundColor={"orange.400"}
+                  borderRadius={"50%"}
+                  width={5}
+                  height={5}
+                >
+                  <Text color={"white"}>{cartItem}</Text>
+                </Flex>
+                <Box>
+                  <BsCart2 size={20} />
+                </Box>
               </Box>
             </Link>
             <Menu>

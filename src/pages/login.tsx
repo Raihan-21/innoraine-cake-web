@@ -1,9 +1,18 @@
 import axiosInstance from "@/axios";
 import BlankLayout from "@/components/templates/blank";
 import useMainStore from "@/store";
-import { Box, Button, Input, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  FormLabel,
+  Input,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { setCookie } from "cookies-next";
 import { cookies } from "next/headers";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactElement, useCallback, useState } from "react";
 
@@ -46,54 +55,72 @@ const login = () => {
   );
 
   return (
-    <Box width={"100%"}>
+    <Flex
+      alignItems={"center"}
+      width={"100%"}
+      minHeight={"calc(100vh - 76px)"}
+      // paddingTop={200}
+      backgroundColor={"primary"}
+    >
       <Box
-        width={350}
-        marginTop={200}
+        width={360}
         marginX={"auto"}
-        borderWidth={1}
-        borderColor={"black"}
-        borderRadius={5}
-        padding={5}
+        borderRadius={8}
+        padding={8}
+        backgroundColor={"white"}
       >
-        <Text fontWeight={"bold"} fontSize={"xl"} marginBottom={5}>
+        <Text fontWeight={"bold"} fontSize={"4xl"} marginBottom={5}>
           Login
         </Text>
         <form onSubmit={onSubmit}>
           <VStack spacing={5} marginBottom={8}>
-            <Input
-              placeholder="Email"
-              value={formData.email}
-              onChange={(e) =>
-                setFormData((prevState) => ({
-                  ...prevState,
-                  email: e.target.value,
-                }))
-              }
-            />
-            <Input
-              placeholder="Password"
-              type="password"
-              value={formData.password}
-              onChange={(e) =>
-                setFormData((prevState) => ({
-                  ...prevState,
-                  password: e.target.value,
-                }))
-              }
-            />
+            <Box width={"100%"}>
+              <FormLabel>Email</FormLabel>
+              <Input
+                placeholder="email@gmail.com"
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData((prevState) => ({
+                    ...prevState,
+                    email: e.target.value,
+                  }))
+                }
+              />
+            </Box>
+            <Box width={"100%"}>
+              <FormLabel>Password</FormLabel>
+              <Input
+                placeholder="Password"
+                type="password"
+                value={formData.password}
+                onChange={(e) =>
+                  setFormData((prevState) => ({
+                    ...prevState,
+                    password: e.target.value,
+                  }))
+                }
+              />
+            </Box>
           </VStack>
-          <Button backgroundColor={"blue.400"} color={"white"} type="submit">
+          <Button backgroundColor={"secondary"} color={"black"} type="submit">
             Login
           </Button>
         </form>
+        <Text marginTop={5}>
+          Belum punya akun?{" "}
+          <Link href="/daftar" className="underline text-blue">
+            {" "}
+            Daftar
+          </Link>{" "}
+          sekarang
+        </Text>
       </Box>
-    </Box>
+    </Flex>
   );
 };
 
-login.Layout = (page: ReactElement) => {
-  return <BlankLayout>{page}</BlankLayout>;
-};
+// login.Layout = (page: ReactElement) => {
+//   return <BlankLayout>{page}</BlankLayout>;
+// };
 
 export default login;

@@ -72,7 +72,7 @@ const produk = ({ products }: { products: ProductType[] }) => {
 
   return (
     <Box
-      backgroundColor={"black"}
+      backgroundColor={"primary"}
       padding={20}
       minHeight={"calc(100vh - 80px)"}
     >

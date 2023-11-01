@@ -37,7 +37,7 @@ export default function Home({
 }) {
   return (
     <Box
-      backgroundColor={"black"}
+      backgroundColor={"primary"}
       paddingY={5}
       paddingX={5}
       minHeight={"calc(100vh - 80px)"}
@@ -53,12 +53,16 @@ export default function Home({
                 </GridItem>
                 <GridItem>
                   <Box>
-                    <Text fontWeight={"bold"} fontSize={50} color={"white"}>
+                    <Text fontWeight={"bold"} fontSize={50} color={"black"}>
                       {product.nama_produk}
                     </Text>
-                    <Text color={"white"}>{product.short_desc ?? ""}</Text>
+                    <Text color={"black"}>{product.short_desc ?? ""}</Text>
                     <Link href={"/menu"}>
-                      <Button position={"absolute"} marginTop={5}>
+                      <Button
+                        position={"absolute"}
+                        backgroundColor={"secondary"}
+                        marginTop={5}
+                      >
                         View Menu
                       </Button>
                     </Link>

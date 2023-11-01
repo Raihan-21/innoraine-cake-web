@@ -2,7 +2,8 @@ import { extendTheme } from "@chakra-ui/react";
 
 const theme = extendTheme({
   colors: {
-    primary: "",
+    primary: "#FAB638",
+    secondary: "#FEE996",
   },
 });
 export default theme;

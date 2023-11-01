@@ -77,7 +77,11 @@ const keranjang = ({ cart }: { cart: any }) => {
   }, [profile]);
 
   return (
-    <Box padding={5}>
+    <Box
+      minHeight={"calc(100vh - 76px)"}
+      padding={5}
+      backgroundColor={"primary"}
+    >
       <Text fontWeight={"bold"} fontSize={"3xl"} marginBottom={5}>
         Keranjang
       </Text>

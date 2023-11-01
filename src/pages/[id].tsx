@@ -124,64 +124,70 @@ const menuDetail = ({
   }, [cartData, data]);
 
   return (
-    <Box paddingX={10}>
-      <Grid columnGap={10} templateColumns={"repeat(3, 1fr)"}>
-        {/* Min width 0 to fix react slick bug */}
-        <GridItem minWidth={0} colSpan={{ base: 3, sm: 1 }}>
-          <Box minWidth={0}>
-            <Img
-              src={selectedImage ? selectedImage : data.gambar_utama}
-              width={"100%"}
-              marginBottom={5}
-            />
+    <Box
+      minHeight={"calc(100vh - 76px)"}
+      padding={10}
+      backgroundColor={"primary"}
+    >
+      <Box backgroundColor={"white"} padding={10} borderRadius={20}>
+        <Grid columnGap={10} templateColumns={"repeat(3, 1fr)"}>
+          {/* Min width 0 to fix react slick bug */}
+          <GridItem minWidth={0} colSpan={{ base: 3, sm: 1 }}>
             <Box minWidth={0}>
-              <Slider {...carouselSetting}>
-                {images.length &&
-                  images.map((image, i) => (
-                    <Box
-                      key={i}
-                      borderRadius={10}
-                      overflow={"hidden"}
-                      height={"100%"}
-                      onClick={() => setSelectedImage(image.url)}
-                    >
-                      <Img src={image.url} height={"100%"} width={"150px"} />
-                    </Box>
-                  ))}
-              </Slider>
+              <Img
+                src={selectedImage ? selectedImage : data.gambar_utama}
+                width={"100%"}
+                marginBottom={5}
+              />
+              <Box minWidth={0}>
+                <Slider {...carouselSetting}>
+                  {images.length &&
+                    images.map((image, i) => (
+                      <Box
+                        key={i}
+                        borderRadius={10}
+                        overflow={"hidden"}
+                        height={"100%"}
+                        onClick={() => setSelectedImage(image.url)}
+                      >
+                        <Img src={image.url} height={"100%"} width={"150px"} />
+                      </Box>
+                    ))}
+                </Slider>
+              </Box>
             </Box>
-          </Box>
-        </GridItem>
-        <GridItem colSpan={{ base: 3, sm: 2 }}>
-          <Box paddingTop={8}>
-            <Text fontWeight={"bold"} fontSize={30}>
-              {data.nama_produk}
-            </Text>
-            <Text marginBottom={5}>{data.deskripsi}</Text>
-            <VStack spacing={5} align={"flex-start"}>
-              <Flex alignItems={"center"} columnGap={5}>
-                <Button borderRadius={"50%"} onClick={decrementProduct}>
-                  -
+          </GridItem>
+          <GridItem colSpan={{ base: 3, sm: 2 }}>
+            <Box paddingTop={8}>
+              <Text fontWeight={"bold"} fontSize={30}>
+                {data.nama_produk}
+              </Text>
+              <Text marginBottom={5}>{data.deskripsi}</Text>
+              <VStack spacing={5} align={"flex-start"}>
+                <Flex alignItems={"center"} columnGap={5}>
+                  <Button borderRadius={"50%"} onClick={decrementProduct}>
+                    -
+                  </Button>
+                  <Box>{cartData.jumlah}</Box>
+                  <Button borderRadius={"50%"} onClick={incrementProduct}>
+                    +
+                  </Button>
+                </Flex>
+                <Button
+                  backgroundColor={"secondary"}
+                  color={"black"}
+                  isDisabled={data.jumlah == 0}
+                  onClick={() => {
+                    addToCart();
+                  }}
+                >
+                  Order this item
                 </Button>
-                <Box>{cartData.jumlah}</Box>
-                <Button borderRadius={"50%"} onClick={incrementProduct}>
-                  +
-                </Button>
-              </Flex>
-              <Button
-                backgroundColor={"black"}
-                color={"white"}
-                isDisabled={data.jumlah == 0}
-                onClick={() => {
-                  addToCart();
-                }}
-              >
-                Order this menu
-              </Button>
-            </VStack>
-          </Box>{" "}
-        </GridItem>
-      </Grid>
+              </VStack>
+            </Box>{" "}
+          </GridItem>
+        </Grid>
+      </Box>
     </Box>
   );
 };
