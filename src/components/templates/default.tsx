@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect } from "react";
 import Navbar from "../molecules/Navbar";
 import useMainStore from "@/store";
 import { getCookie } from "cookies-next";
-
+import Head from "next/head";
 const DefaultLayout = ({ children }: { children: ReactElement }) => {
   const token = useMainStore((state: any) => state.token);
   const setToken = useMainStore((state: any) => state.setToken);
@@ -20,6 +20,9 @@ const DefaultLayout = ({ children }: { children: ReactElement }) => {
 
   return (
     <>
+      <Head>
+        <title>Innoraine Cake</title>
+      </Head>
       <Navbar />
       {children}
     </>
