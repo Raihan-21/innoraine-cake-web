@@ -31,10 +31,21 @@ export const getServerSideProps = async (context: any) => {
 
 const InvoiceDetail = ({ items, invoice }: { items: any; invoice: any }) => {
   return (
-    <Box padding={10}>
-      <Box padding={10} boxShadow={"0px 0px 5px 1px  gray"}>
+    <Box
+      padding={10}
+      backgroundColor={"primary"}
+      minHeight={"calc(100vh - 76px)"}
+    >
+      <Box
+        padding={10}
+        boxShadow={"0px 0px 5px 1px  gray"}
+        backgroundColor={"white"}
+        borderRadius={10}
+      >
         <Flex justifyContent={"space-between"} marginBottom={5}>
-          <Text fontSize={"3xl"}>Invoice</Text>
+          <Text fontSize={"3xl"} fontWeight={"bold"}>
+            Invoice
+          </Text>
           <Text>{new Date(invoice.created_at).toLocaleString()}</Text>
         </Flex>
         <Table>

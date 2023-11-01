@@ -19,58 +19,68 @@ export const getServerSideProps = async (context: any) => {
 };
 const invoice = ({ invoices }: { invoices: any }) => {
   return (
-    <Box paddingX={10}>
-      <Text fontWeight={"bold"} fontSize={"2xl"} marginBottom={5}>
-        Invoices
-      </Text>
-      <VStack spacing={5} align={"flex-start"} width={"100%"}>
-        {invoices.length &&
-          invoices.map((invoice: any, i: number) => (
-            <Link
-              key={i}
-              href={`/invoice/${invoice.id}`}
-              style={{ width: "100%" }}
-            >
-              <Flex
-                justifyContent={"space-between"}
-                width={"100%"}
-                padding={3}
-                boxShadow={"0px 0px 5px 1px gray"}
-                columnGap={5}
-                borderRadius={5}
+    <Box
+      minHeight={"calc(100vh - 76px)"}
+      padding={10}
+      backgroundColor={"primary"}
+    >
+      <Box backgroundColor={"white"} borderRadius={5} padding={5}>
+        <Text fontWeight={"bold"} fontSize={"2xl"} marginBottom={5}>
+          Invoices
+        </Text>
+        <VStack spacing={5} align={"flex-start"} width={"100%"}>
+          {invoices.length &&
+            invoices.map((invoice: any, i: number) => (
+              <Link
+                key={i}
+                href={`/invoice/${invoice.id}`}
+                style={{ width: "100%" }}
               >
                 <Flex
-                  columnGap={5}
                   justifyContent={"space-between"}
                   width={"100%"}
+                  padding={3}
+                  boxShadow={"0px 0px 5px 1px gray"}
+                  columnGap={5}
+                  borderRadius={5}
                 >
-                  <Box>
-                    <Text>{invoice.alamat}</Text>
-                  </Box>
-                  <VStack alignItems={"flex-end"}>
+                  <Flex
+                    columnGap={5}
+                    justifyContent={"space-between"}
+                    width={"100%"}
+                  >
                     <Box>
-                      <Text>
-                        {new Date(invoice.created_at).toLocaleString("id-ID", {
-                          hour12: false,
-                        })}
-                      </Text>
-                      {/* <Text>{invoice.created_at}</Text> */}
+                      <Text fontWeight={"bold"}>{invoice.nama}</Text>
+                      <Text>{invoice.alamat}</Text>
                     </Box>
-                    {invoice.status && (
-                      <Pills
-                        color={invoice.status === "pending" ? "red" : "green"}
-                        text={invoice.status}
-                      />
-                    )}
-                  </VStack>
-                </Flex>
-                {/* {invoice.status && (
+                    <VStack alignItems={"flex-end"}>
+                      <Box>
+                        <Text>
+                          {new Date(invoice.created_at).toLocaleString(
+                            "id-ID",
+                            {
+                              hour12: false,
+                            }
+                          )}
+                        </Text>
+                        {/* <Text>{invoice.created_at}</Text> */}
+                      </Box>
+                      {invoice.status && (
+                        <Pills
+                          color={invoice.status === "pending" ? "red" : "green"}
+                          text={invoice.status}
+                        />
+                      )}
+                    </VStack>
+                  </Flex>
+                  {/* {invoice.status && (
                   <Pills color="red.400" text={invoice.status} />
                 )} */}
-              </Flex>
-            </Link>
-          ))}
-      </VStack>
+                </Flex>
+              </Link>
+            ))}
+        </VStack>
+      </Box>
     </Box>
   );
 };
