@@ -22,6 +22,8 @@ import CartItem from "@/components/organisms/CartItem";
 import useMainStore from "@/store";
 import { useRouter } from "next/router";
 
+import { BsArrowLeft } from "react-icons/bs";
+
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
@@ -62,7 +64,7 @@ const keranjang = ({ cart }: { cart: any }) => {
         alamat: formData.alamat,
       });
       toast({
-        title: "Order success",
+        title: "Berhasil memesan",
         status: "success",
         duration: 5000,
         isClosable: false,
@@ -84,9 +86,22 @@ const keranjang = ({ cart }: { cart: any }) => {
       backgroundColor={"primary"}
     >
       <Box backgroundColor={"white"} padding={10} borderRadius={10}>
-        <Text fontWeight={"bold"} fontSize={"3xl"} marginBottom={5}>
-          Keranjang
-        </Text>
+        <Flex alignItems={"center"}>
+          {" "}
+          {step === 2 && (
+            <Button
+              variant={"unstyled"}
+              onClick={() => {
+                setStep(1);
+              }}
+            >
+              <BsArrowLeft />
+            </Button>
+          )}
+          <Text fontWeight={"bold"} fontSize={"3xl"} marginBottom={5}>
+            Keranjang
+          </Text>
+        </Flex>
         {!cart.data.length ? (
           <Flex justifyContent={"center"}>
             Anda belum memiliki kue apapun dalam keranjang
@@ -157,6 +172,7 @@ const keranjang = ({ cart }: { cart: any }) => {
                   borderRadius={10}
                   flexGrow={1}
                   spacing={3}
+                  height={"min-content"}
                 >
                   <Text
                     fontWeight={"bold"}

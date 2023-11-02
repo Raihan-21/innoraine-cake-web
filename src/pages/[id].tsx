@@ -59,6 +59,8 @@ const menuDetail = ({
   });
   const isLoggedIn = useMainStore((state: any) => state.isLoggedIn);
   const profile = useMainStore((state: any) => state.profile);
+  const cartItem = useMainStore((state: any) => state.cart.totalItem);
+  const setCartItem = useMainStore((state: any) => state.cart.setTotalItem);
   const router = useRouter();
   const toast = useToast();
   const addToCart = useCallback(async () => {
@@ -79,11 +81,13 @@ const menuDetail = ({
         status: "success",
         duration: 5000,
       });
+      console.log(typeof cartItem + cartData.jumlah);
+      setCartItem(Number(cartItem) + Number(cartData.jumlah));
       // router.push("/keranjang");
     } catch (error) {
       throw error;
     }
-  }, [isLoggedIn, profile, data, cartData]);
+  }, [isLoggedIn, profile, data, cartData, cartItem, setCartItem]);
   const incrementProduct = useCallback(async () => {
     try {
       // const res = await axiosInstance.put("/api/cart", {

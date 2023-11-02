@@ -24,7 +24,7 @@ const Navbar = () => {
     const fetchData = async () => {
       try {
         const res = await axiosInstance.get(`/api/cart/total/${idUser}`);
-        setCartItem(res.data.body.count);
+        setCartItem(res.data.body.total);
       } catch (error) {
         throw error;
       }
@@ -40,26 +40,28 @@ const Navbar = () => {
           </Text>
         </Link>
         <Flex columnGap={10}>
-          <Link href="/test">About </Link>
+          <Link href="/test">Tentang Kami </Link>
           <Link href="/menu">Menu </Link>
         </Flex>
         {isLoggedIn ? (
           <Flex columnGap={3} alignItems={"center"}>
             <Link href={"/keranjang"}>
               <Box position={"relative"}>
-                <Flex
-                  position={"absolute"}
-                  top={-3}
-                  left={-5}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  backgroundColor={"orange.400"}
-                  borderRadius={"50%"}
-                  width={5}
-                  height={5}
-                >
-                  <Text color={"white"}>{cartItem}</Text>
-                </Flex>
+                {cartItem > 0 && (
+                  <Flex
+                    position={"absolute"}
+                    top={-3}
+                    left={-5}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    backgroundColor={"orange.400"}
+                    borderRadius={"50%"}
+                    width={5}
+                    height={5}
+                  >
+                    <Text color={"white"}>{cartItem}</Text>
+                  </Flex>
+                )}
                 <Box>
                   <BsCart2 size={20} />
                 </Box>
