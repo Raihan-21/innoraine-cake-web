@@ -70,7 +70,7 @@ const login = () => {
         backgroundColor={"white"}
       >
         <Text fontWeight={"bold"} fontSize={"4xl"} marginBottom={5}>
-          Login
+          Masuk
         </Text>
         <form onSubmit={onSubmit}>
           <VStack spacing={5} marginBottom={8}>
@@ -103,7 +103,7 @@ const login = () => {
             </Box>
           </VStack>
           <Button backgroundColor={"secondary"} color={"black"} type="submit">
-            Login
+            Masuk
           </Button>
         </form>
         <Text marginTop={5}>

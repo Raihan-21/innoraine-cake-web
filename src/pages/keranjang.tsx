@@ -179,7 +179,7 @@ const keranjang = ({ cart }: { cart: any }) => {
                     fontSize={"large"}
                     textAlign={"center"}
                   >
-                    Subtotal:
+                    Total:
                   </Text>
                   <Text
                     textAlign={"center"}

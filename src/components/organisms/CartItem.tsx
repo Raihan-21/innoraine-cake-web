@@ -16,6 +16,10 @@ const CartItem = ({ data }: { data: any }) => {
   const [cartData, setCartData] = useState(data);
   const [isLoading, setIsLoading] = useState(false);
   const profile = useMainStore((state: any) => state.profile);
+  const cartTotalItem = useMainStore((state: any) => state.cart.totalItem);
+  const setCartTotalItem = useMainStore(
+    (state: any) => state.cart.setTotalItem
+  );
   const incrementProduct = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -54,6 +58,7 @@ const CartItem = ({ data }: { data: any }) => {
         jumlah: prevState.jumlah - 1,
         harga: Number(prevState.harga) - prevState.produk.harga,
       }));
+      setCartTotalItem(cartTotalItem - 1);
     } catch (error) {
       throw error;
     } finally {

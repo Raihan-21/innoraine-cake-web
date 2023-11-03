@@ -4,6 +4,7 @@ interface CategoryType {
 }
 interface ProductType {
   id: number;
+  slug: string;
   nama_produk: string;
   gambar_utama: string;
   id_kategori: number;

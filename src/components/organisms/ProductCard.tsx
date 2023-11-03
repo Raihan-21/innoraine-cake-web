@@ -31,7 +31,7 @@ const ProductCard = ({ data }: { data: ProductType }) => {
         height={"100%"}
       >
         <Box>
-          <Link href={`/${data.id}`}>
+          <Link href={`/${data.slug}`}>
             <Img
               src={data.gambar_utama}
               width={"100%"}

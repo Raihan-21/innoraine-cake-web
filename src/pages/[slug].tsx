@@ -24,12 +24,13 @@ export const getServerSideProps = async ({ params }: { params: any }) => {
   //   const { id } = params;
 
   const [product, images] = await Promise.all([
-    axiosInstance.get(`/api/products/${params.id}`),
-    axiosInstance.get(`/api/products/gallery/${params.id}`),
+    axiosInstance.get(`/api/products/${params.slug}`),
+    axiosInstance.get(`/api/products/gallery/${params.slug}`),
   ]);
   let carouselSetting = {
     arrows: true,
     slidesToShow: 4,
+    infinite: false,
   };
   if (images.data.body.length < 4) {
     carouselSetting.slidesToShow = images.data.body.length;
@@ -72,7 +73,7 @@ const menuDetail = ({
     try {
       const res = await axiosInstance.post(`/api/cart`, {
         id_user: profile.id,
-        id_produk: router.query.id,
+        id_produk: data.id,
         jumlah: cartData.jumlah,
         harga: cartData.harga,
       });
@@ -154,7 +155,7 @@ const menuDetail = ({
                         height={"100%"}
                         onClick={() => setSelectedImage(image.url)}
                       >
-                        <Img src={image.url} height={"100%"} width={"150px"} />
+                        <Img src={image.url} height={"50px"} width={"150px"} />
                       </Box>
                     ))}
                 </Slider>
@@ -185,7 +186,7 @@ const menuDetail = ({
                     addToCart();
                   }}
                 >
-                  Order this item
+                  Tambah ke keranjang
                 </Button>
               </VStack>
             </Box>{" "}
