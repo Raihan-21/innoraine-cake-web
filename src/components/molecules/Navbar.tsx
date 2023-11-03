@@ -83,8 +83,8 @@ const Navbar = () => {
             <Link href={"/login"}>
               <Button
                 variant={"solid"}
-                backgroundColor={"black"}
-                color={"white"}
+                backgroundColor={"secondary"}
+                color={"black"}
               >
                 Masuk
               </Button>
