@@ -155,7 +155,7 @@ const menuDetail = ({
                         height={"100%"}
                         onClick={() => setSelectedImage(image.url)}
                       >
-                        <Img src={image.url} height={"50px"} width={"150px"} />
+                        <Img src={image.url} height={"50px"} />
                       </Box>
                     ))}
                 </Slider>

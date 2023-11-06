@@ -38,6 +38,7 @@ const ProductCard = ({ data }: { data: ProductType }) => {
               borderRadius={10}
               marginBottom={3}
               height={173}
+              objectFit={"cover"}
             />
           </Link>
           <Text fontWeight={"extrabold"} fontSize={"large"}>
