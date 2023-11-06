@@ -40,7 +40,7 @@ const Navbar = () => {
           </Text>
         </Link>
         <Flex columnGap={10}>
-          <Link href="/test">Tentang Kami </Link>
+          <Link href="/tentang-kami">Tentang Kami </Link>
           <Link href="/menu">Menu </Link>
         </Flex>
         {isLoggedIn ? (
