@@ -168,6 +168,11 @@ const menuDetail = ({
                 {data.nama_produk}
               </Text>
               <Text marginBottom={5}>{data.deskripsi}</Text>
+              {data.jumlah == 0 && (
+                <Text color={"red"} fontWeight={"bold"} marginBottom={3}>
+                  Stok habis
+                </Text>
+              )}
               <VStack spacing={5} align={"flex-start"}>
                 <Flex alignItems={"center"} columnGap={5}>
                   <Button borderRadius={"50%"} onClick={decrementProduct}>
