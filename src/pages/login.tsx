@@ -78,6 +78,7 @@ const login = () => {
               <FormLabel>Email</FormLabel>
               <Input
                 placeholder="email@gmail.com"
+                name="email"
                 value={formData.email}
                 onChange={(e) =>
                   setFormData((prevState) => ({

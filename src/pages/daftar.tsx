@@ -11,6 +11,7 @@ import {
   Text,
   Textarea,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import { setCookie } from "cookies-next";
 import { cookies } from "next/headers";
@@ -41,6 +42,7 @@ const daftar = () => {
   const setProfile = useMainStore((state: any) => state.setProfile);
 
   const router = useRouter();
+  const toast = useToast();
   const onSubmit = useCallback(
     async (e: any) => {
       e.preventDefault();
@@ -56,7 +58,14 @@ const daftar = () => {
         // setToken(res.data.token);
         // setProfile(res.data.body);
         // window.localStorage.setItem("auth", JSON.stringify(authData));
-        router.push("/login");
+        toast({
+          title: "Berhasil membuat akun",
+          status: "success",
+          duration: 700,
+        });
+        setTimeout(() => {
+          router.push("/login");
+        }, 1000);
       } catch (error) {
         throw error;
       }
@@ -116,6 +125,7 @@ const daftar = () => {
                 placeholder="No Telp"
                 type="number"
                 value={formData.no_telp}
+                name="no_telp"
                 onChange={(e) =>
                   setFormData((prevState) => ({
                     ...prevState,
