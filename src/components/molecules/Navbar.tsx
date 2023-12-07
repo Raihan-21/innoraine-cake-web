@@ -13,13 +13,24 @@ import {
 import Link from "next/link";
 import { BsCart, BsCart2 } from "react-icons/bs";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
+import { deleteCookie } from "cookies-next";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const isLoggedIn = useMainStore((state: any) => state.isLoggedIn);
   const cartItem = useMainStore((state: any) => state.cart.totalItem);
   const idUser = useMainStore((state: any) => state.profile.id);
   const setCartItem = useMainStore((state: any) => state.cart.setTotalItem);
+  const setLoggedIn = useMainStore((state: any) => state.setLoggedIn);
+
+  const router = useRouter();
+  const logout = useCallback(() => {
+    setLoggedIn(false);
+    deleteCookie("innoraine_token");
+    router.push("/");
+  }, [isLoggedIn]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,7 +50,7 @@ const Navbar = () => {
             Innoraine Cake
           </Text>
         </Link>
-        <Flex columnGap={10}>
+        <Flex columnGap={10} alignItems={"center"}>
           <Link href="/tentang-kami">Tentang Kami </Link>
           <Link href="/menu">Menu </Link>
         </Flex>
@@ -74,6 +85,14 @@ const Navbar = () => {
                   <Link href={"/invoice"} style={{ width: "100%" }}>
                     Invoice
                   </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Text color={"red"} onClick={logout} width={"100%"}>
+                    Logout
+                  </Text>
+                  {/* <Button variant={"nostyle"} color={"red"} onClick={logout}>
+                    Logout
+                  </Button> */}
                 </MenuItem>
               </MenuList>
             </Menu>
