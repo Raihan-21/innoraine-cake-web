@@ -1,8 +1,10 @@
 import axiosInstance from "@/axios";
+import Pills from "@/components/molecules/Pills";
 import {
   Box,
   Flex,
   Grid,
+  HStack,
   Table,
   Tbody,
   Td,
@@ -10,6 +12,7 @@ import {
   Th,
   Thead,
   Tr,
+  VStack,
 } from "@chakra-ui/react";
 import React from "react";
 
@@ -46,7 +49,13 @@ const InvoiceDetail = ({ items, invoice }: { items: any; invoice: any }) => {
           <Text fontSize={"3xl"} fontWeight={"bold"}>
             Invoice
           </Text>
-          <Text>{new Date(invoice.created_at).toLocaleString()}</Text>
+          <VStack alignItems={"end"}>
+            <Pills
+              text={invoice.status}
+              color={invoice.status === "paid" ? "green" : "red"}
+            />
+            <Text>{new Date(invoice.created_at).toLocaleString()}</Text>
+          </VStack>
         </Flex>
         <Table>
           <Thead>
