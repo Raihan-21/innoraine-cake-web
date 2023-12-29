@@ -26,7 +26,7 @@ interface LoginFormType {
   password: string;
 }
 
-const daftar = () => {
+const Daftar = () => {
   const [formData, setFormData] = useState<LoginFormType>({
     nama: "",
     email: "",
@@ -175,4 +175,4 @@ const daftar = () => {
 //   return <BlankLayout>{page}</BlankLayout>;
 // };
 
-export default daftar;
+export default Daftar;

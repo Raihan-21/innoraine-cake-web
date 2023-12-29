@@ -41,7 +41,7 @@ export const getServerSideProps = async (
   }
 };
 
-const keranjang = ({ cart }: { cart: any }) => {
+const Keranjang = ({ cart }: { cart: any }) => {
   const [step, setStep] = useState(1);
   const profile = useMainStore((state: any) => state.profile);
   const [formData, setFormData] = useState<UserType>({
@@ -330,4 +330,4 @@ const keranjang = ({ cart }: { cart: any }) => {
   );
 };
 
-export default keranjang;
+export default Keranjang;

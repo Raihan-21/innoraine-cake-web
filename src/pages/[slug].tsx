@@ -44,7 +44,7 @@ export const getServerSideProps = async ({ params }: { params: any }) => {
   };
 };
 
-const menuDetail = ({
+const MenuDetail = ({
   data,
   images,
   carouselSetting,
@@ -202,4 +202,4 @@ const menuDetail = ({
   );
 };
 
-export default menuDetail;
+export default MenuDetail;

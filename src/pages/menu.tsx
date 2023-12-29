@@ -22,7 +22,7 @@ export const getServerSideProps = async () => {
   };
 };
 
-const produk = ({ products }: { products: ProductType[] }) => {
+const Produk = ({ products }: { products: ProductType[] }) => {
   const isLoggedIn = useMainStore((state: any) => state.isLoggedIn);
   const profile = useMainStore((state: any) => state.profile);
   const router = useRouter();
@@ -92,4 +92,4 @@ const produk = ({ products }: { products: ProductType[] }) => {
   );
 };
 
-export default produk;
+export default Produk;

@@ -26,7 +26,7 @@ export const getServerSideProps = async (context: any) => {
   }
 };
 
-const profile = ({ data }: { data: any }) => {
+const Profile = ({ data }: { data: any }) => {
   const [formData, setFormData] = useState(data);
   return (
     <Box padding={10}>
@@ -66,4 +66,4 @@ const profile = ({ data }: { data: any }) => {
   );
 };
 
-export default profile;
+export default Profile;

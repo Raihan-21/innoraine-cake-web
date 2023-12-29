@@ -21,7 +21,7 @@ interface LoginFormType {
   password: string;
 }
 
-const login = () => {
+const Login = () => {
   const [formData, setFormData] = useState<LoginFormType>({
     email: "",
     password: "",
@@ -124,4 +124,4 @@ const login = () => {
 //   return <BlankLayout>{page}</BlankLayout>;
 // };
 
-export default login;
+export default Login;
