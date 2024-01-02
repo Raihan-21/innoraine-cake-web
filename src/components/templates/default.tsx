@@ -11,8 +11,11 @@ const DefaultLayout = ({ children }: { children: ReactElement }) => {
   const setToken = useMainStore((state: any) => state.setToken);
   const setLoggedIn = useMainStore((state: any) => state.setLoggedIn);
   const setProfile = useMainStore((state: any) => state.setProfile);
-  const tokenCookie = getCookie("innoraine_token") || "{}";
-  const profileCookie = JSON.parse(tokenCookie);
+  const tokenCookie = getCookie("innoraine_token");
+  let profileCookie = "";
+  if (tokenCookie !== undefined && tokenCookie !== null) {
+    profileCookie = JSON.parse(profileCookie);
+  }
 
   const updateViewport = useCallback(() => {
     if (window.innerWidth > 400) {
