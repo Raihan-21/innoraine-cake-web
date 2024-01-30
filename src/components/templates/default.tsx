@@ -12,9 +12,9 @@ const DefaultLayout = ({ children }: { children: ReactElement }) => {
   const setLoggedIn = useMainStore((state: any) => state.setLoggedIn);
   const setProfile = useMainStore((state: any) => state.setProfile);
   const tokenCookie = getCookie("innoraine_token");
-  let profileCookie = "";
+  let profileCookie = getCookie("innoraine_profile");
   if (tokenCookie !== undefined && tokenCookie !== null) {
-    profileCookie = JSON.parse(profileCookie);
+    profileCookie = JSON.parse(profileCookie!.toString());
   }
 
   const updateViewport = useCallback(() => {
